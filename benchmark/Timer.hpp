@@ -20,7 +20,7 @@ public:
     ~Timer()
     {
         if(m_printOnInvalidation)
-            std::cout << m_msg << ": " << Duration() << "us\n";
+            std::cout << m_msg << ": " << Duration() << "ns\n";
     }
     std::double_t Duration()
     {
@@ -37,7 +37,6 @@ private:
     std::string m_msg;
 };
 
-
 template<std::size_t Samples>
 class TimerAverage
 {
@@ -53,7 +52,7 @@ public:
     ~TimerAverage()
     {
         if(m_printOnInvalidation)
-            std::cout << m_msg << ": " << Duration() << "us\n";
+            std::cout << m_msg << ": " << Duration() << "ns\n";
     }
     void StartMeasure()
     {

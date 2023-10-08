@@ -27,16 +27,19 @@ static void BM_TriangulationFlipGraph_generateGraph(benchmark::State& state)
         state.counters["Edges"] += static_cast<double>(mesh.edges().size());
         state.counters["Nodes"] += static_cast<double>(mesh.vertices().size());
     }
-
     state.SetComplexityN(state.range(0));
 }
 
 BENCHMARK(BM_TriangulationFlipGraph_generateGraph)
     ->DenseRange(4, 13, 1)
+    ->Iterations(100)
+    ->Complexity([](benchmark::IterationCount N) -> double
+                 { return std::exp(1.2 * static_cast<double>(N)); });
+
+BENCHMARK(BM_TriangulationFlipGraph_generateGraph)
+    ->DenseRange(4, 13, 1)
     ->Iterations(1)
     ->Repetitions(100)
-    ->Complexity([](benchmark::IterationCount N) -> double
-                 { return std::exp(1.2 * N); })
     ->ReportAggregatesOnly();
 
 BENCHMARK_MAIN();
